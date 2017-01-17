@@ -1,3 +1,4 @@
 import image from './image';
+import user from './user';
 
-export default { image };
+export default { image, user };

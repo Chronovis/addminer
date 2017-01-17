@@ -1,14 +1,14 @@
+import * as cx from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as cx from 'classnames';
 import { uploadImage } from '../actions/image';
 
 interface IEventsProps {
-	imageHeight: number,
-	imageSrc: string,
-	imageWidth: number,
-	percentageLoaded: number,
-	uploadImage: (any) => void,
+	imageHeight: number;
+	imageSrc: string;
+	imageWidth: number;
+	percentageLoaded: number;
+	uploadImage: (file: any) => void;
 }
 
 class App extends React.Component<IEventsProps, {}> {
@@ -90,9 +90,9 @@ class App extends React.Component<IEventsProps, {}> {
 
 export default connect(
 	state => ({
+		imageHeight: state.image.imageHeight,
 		imageSrc: state.image.imageSrc,
 		imageWidth: state.image.imageWidth,
-		imageHeight: state.image.imageHeight,
 		percentageLoaded: state.image.percentageLoaded,
 	}),
 	{ uploadImage },
