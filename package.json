@@ -12,8 +12,8 @@
     "build-server": "tsc -p src/server/",
     "build-stylus": "stylus --out ./build/client/css/index.css ./src/client/stylus/index.styl",
     "client-server": "scripts/server.js",
-    "database": "docker run --rm -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -e PGDATA=/pgdata -v timeline-data:/pgdata -p 5432:5432 gijsjan/postgresql:1.0",
-    "server": "node build/server",
+    "database": "docker run --rm --name addminer_db -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -e PGDATA=/pgdata -v addminer_data:/pgdata -p 5432:5432 gijsjan/postgresql:1.0",
+    "server": "nodemon build/server",
     "watch-client": "scripts/build-client.sh watch",
     "watch-server": "tsc -w -p src/server/",
     "watch-stylus": "stylus --watch --out ./build/client/css/index.css ./src/client/stylus/index.styl"
@@ -23,6 +23,7 @@
     "browserify": "^13.3.0",
     "connect-modrewrite": "^0.9.0",
     "lodash.debounce": "^4.0.8",
+    "nodemon": "^1.11.0",
     "proxy-middleware": "^0.15.0",
     "stylus": "^0.54.5",
     "tsify": "^3.0.0",
