@@ -55,17 +55,11 @@ class App extends React.Component<IEventsProps, {}> {
 					(imageSrc != null) &&
 					<div
 						className="image-placeholder"
-						style={{
-							height,
-							width,
-						}}
+						style={{ height, width }}
 					>
 						<img
 							src={imageSrc}
-							style={{
-								height,
-								width,
-							}}
+							style={{ height, width }}
 						/>
 						<div
 							className="loader"
