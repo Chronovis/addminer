@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "outDir": "../../build/client",
+    "removeComments": true,
+    "target": "es6"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
