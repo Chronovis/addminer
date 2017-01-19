@@ -3,5 +3,12 @@ export const imageUpload = ({ date, filename, mimetype }) => `
 		CURRENT_TIMESTAMP,
 		'${filename}',
 		'${mimetype}'
-	);
+	) RETURNING id;
 `;
+
+export const updateImageWithOcr = (id, ocrText) => `
+	UPDATE image
+	SET ocr = '${ocrText}'
+	WHERE id = '${id}';
+`;
+

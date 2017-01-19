@@ -1,6 +1,5 @@
 export const userLogin = ({ email_address, password }) => `
-	SELECT "user".id 
+	SELECT "user".hash 
 	FROM "user"
 	WHERE "user".email_address = '${email_address}'
-		AND "user".password = '${password}';
 `;

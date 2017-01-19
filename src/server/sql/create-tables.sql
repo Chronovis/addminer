@@ -16,7 +16,7 @@ CREATE TABLE image (
 CREATE TABLE "user" (
 	id SERIAL PRIMARY KEY,
   email_address TEXT UNIQUE,
-	password TEXT,
+	hash TEXT,
 	registration_date TIMESTAMP WITH TIME ZONE
 );
 
@@ -40,8 +40,8 @@ CREATE TABLE image__tag (
 INSERT INTO tag (name) VALUES ('anne-dak');
 INSERT INTO tag (name) VALUES ('annie-mg-schmidt');
 
-INSERT INTO "user" (email_address, password, registration_date) VALUES (
+INSERT INTO "user" (email_address, hash, registration_date) VALUES (
 	'agijsbro@gmail.com',
-	'pww',
+	'$2a$10$z269rNN45r1LBQfI5R9MReaKkdAyFhreLvChHyBysue5BUen19P1C',
 	CURRENT_TIMESTAMP
 );
