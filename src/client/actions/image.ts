@@ -25,6 +25,10 @@ export const uploadImage = (file) => (dispatch, getState) => {
 	const onReadystatechange = (ev) => {
 		if (xhr.readyState === 4) {
 			dispatch({
+				type: 'RECEIVE_MESSAGE',
+				message: JSON.parse(ev.target.response),
+			});
+			dispatch({
 				type: 'IMAGE_UPLOAD_READY',
 			});
 		}

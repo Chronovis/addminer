@@ -11,15 +11,16 @@ const pgPool = new pg.Pool({
 
 export default (sql) => new Promise((resolve, reject) =>
 	pgPool.connect((connectionError, client, releaseClient) => {
+		console.log('sql', sql);
 		if (connectionError) {
 			reject(connectionError);
-			return console.error('Error fetching client from pool', connectionError);
+			// return console.error('Error fetching client from pool', connectionError);
 		}
 
 		client.query(sql, (queryError, result) => {
 			if (queryError) {
 				reject(queryError);
-				return console.error('Error querying database', queryError);
+				// return console.error('Error querying database', queryError);
 			}
 
 			resolve(result);

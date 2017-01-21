@@ -1,8 +1,9 @@
-export const imageUpload = ({ date, filename, mimetype }) => `
-	INSERT INTO image (date, filename, mimetype) VALUES (
+
+export const imageUpload = (file, hash) => `
+	INSERT INTO image (date, hash, mimetype) VALUES (
 		CURRENT_TIMESTAMP,
-		'${filename}',
-		'${mimetype}'
+		'${hash}',
+		'${file.mimetype}'
 	) RETURNING id;
 `;
 

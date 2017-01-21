@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS image__tag CASCADE;
 CREATE TABLE image (
 	id SERIAL PRIMARY KEY,
 	date TIMESTAMP WITH TIME ZONE,
-	filename TEXT,
+  hash TEXT UNIQUE,
 	mimetype TEXT,
 	ocr TEXT,
 	coordinates GEOGRAPHY(POINT,4326)

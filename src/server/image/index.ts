@@ -1,4 +1,6 @@
 import { exec } from 'child_process';
+import * as fs from 'fs';
+import * as md5File from 'md5-file/promise';
 import * as multer from 'multer';
 import pgConnect from '../pg-pool';
 import { imageUpload, updateImageWithOcr } from './sql';
@@ -11,34 +13,34 @@ const imageOcr = (file) => new Promise((resolve, reject) => {
 	});
 });
 
-const generateId = (length) => {
-	length = (length != null && length > 0) ? (length - 1) : 6;
+export default (app) => {
+	const dest = 'upload/';
+	const upload = multer({ dest });
 
-	const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-	let text = chars.charAt(Math.floor(Math.random() * 52)); // Start with a letter
+	app.post(
+		'/upload',
+		upload.single('image'),
+		async (req, res) => {
+			const hash = await md5File(req.file.path);
+			const filename = `${hash}.${req.file.mimetype.split('/')[1]}`;
+			fs.renameSync(req.file.path, `${dest}filename`);
 
-	// Countdown is more lightweight than for-loop
-	while (length--) {
-		text += chars.charAt(Math.floor(Math.random() * chars.length));
-	}
+			let result;
+			try {
+				result = await pgConnect(imageUpload(req.file, hash));
+			} catch (error) {
+				const message = { type: 'error', httpCode: 422, value: '' };
+				if (error.code === '23505') {
+					message.httpCode = 409;
+					message.value = 'Duplicate entry';
+				}
+				res.status(message.httpCode).json(message);
+			}
 
-	return text;
-};
+			// const ocrText: string = await imageOcr(req.file);
+			// const result2 = await pgConnect(updateImageWithOcr(result.rows[0].id, ocrText.replace(`'`, `''`)));
+			res.end();
 
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, 'upload/');
-	},
-	filename: (req, file, cb) => {
-		cb(null, `${generateId(32)}.${file.mimetype.split('/')[1]}`);
-	}
-});
-const upload = multer({ storage });
-
-export default (app) =>
-	app.post('/upload', upload.single('image'), async (req, res) => {
-		const result = await pgConnect(imageUpload(req.file));
-		const ocrText: string = await imageOcr(req.file);
-		const result2 = await pgConnect(updateImageWithOcr(result.rows[0].id, ocrText.replace(`'`, `''`)));
-		res.end();
-	});
+		}
+	);
+}
