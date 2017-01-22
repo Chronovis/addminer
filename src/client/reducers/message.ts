@@ -3,7 +3,7 @@ import Queue from '../utils/queue';
 const messages = new Queue();
 const initialState = {
 	lastMessage: null,
-	messages: messages.elements,
+	messages: messages.get(),
 };
 
 export default (state = initialState, action) => {
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
 			messages.add(action.message);
 			nextState = { ...nextState, ...{
 				lastMessage: messages.last(),
-				messages: messages.elements,
+				messages: messages.get(),
 			}};
 			break;
 		}
