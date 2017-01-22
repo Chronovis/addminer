@@ -1,9 +1,9 @@
-const Queue = require('../../../src/client/utils/queue').default;
+import Queue from '../../../src/client/utils/queue';
 
 describe('Utils - Queue', () => {
 	const queue = new Queue(8);
 
-	it('should add items to the queue', () => {
+	it('should add items to the end of the queue', () => {
 		queue.add('a');
 		expect(queue.size()).toBe(1);
 
@@ -19,7 +19,7 @@ describe('Utils - Queue', () => {
 		expect(queue.size()).toBe(8);
 	});
 
-	it('should return the first item (10 but last added item)', () => {
+	it('should return the first item (7 but last added item)', () => {
 		expect(queue.first()).toBe('h');
 	});
 
