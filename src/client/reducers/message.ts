@@ -1,17 +1,4 @@
-class Queue {
-	public elements = [];
-
-	public add(element) {
-		if (this.elements.length > 9) {
-			this.elements = this.elements.slice(1);
-		}
-		this.elements = this.elements.concat(element);
-	}
-
-	public last() {
-		return this.elements[this.elements.length - 1];
-	}
-}
+import Queue from '../utils/queue';
 
 const messages = new Queue();
 const initialState = {

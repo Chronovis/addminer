@@ -14,6 +14,8 @@
     "client-server": "scripts/server.js",
     "database": "docker run --rm --name addminer_db -e POSTGRES_USER=docker -e POSTGRES_PASSWORD=docker -e PGDATA=/pgdata -v addminer_data:/pgdata -p 5432:5432 gijsjan/postgresql:1.0",
     "server": "nodemon build/server",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "watch-client": "scripts/build-client.sh watch",
     "watch-server": "tsc -w -p src/server/",
     "watch-stylus": "stylus --watch --out ./build/client/css/index.css ./src/client/stylus/index.styl"
@@ -22,10 +24,12 @@
     "browser-sync": "^2.18.6",
     "browserify": "^13.3.0",
     "connect-modrewrite": "^0.9.0",
+    "jest": "^18.1.0",
     "lodash.debounce": "^4.0.8",
     "nodemon": "^1.11.0",
     "proxy-middleware": "^0.15.0",
     "stylus": "^0.54.5",
+    "ts-jest": "^18.0.1",
     "tsify": "^3.0.0",
     "tslint": "^4.3.1",
     "typescript": "^2.1.5",
@@ -57,5 +61,19 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^2.0.1"
+  },
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": "src/client/tsconfig.json"
+    },
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   }
 }
