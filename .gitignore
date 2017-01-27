@@ -1,7 +1,7 @@
-*.iml
-.idea
-dist
-build
-node_modules
-npm-debug.log
-upload
+/*.iml
+/.idea
+/dist
+/build
+/node_modules
+/npm-debug.log
+/upload
