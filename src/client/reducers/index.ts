@@ -1,4 +1,5 @@
 import image from './image';
 import user from './user';
+import message from './message';
 
-export default { image, user };
+export default { image, message, user };

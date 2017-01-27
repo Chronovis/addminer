@@ -1,8 +1,19 @@
 import Queue from '../utils/queue';
+import { IMessage } from '../../interfaces';
 
+interface IState {
+	currentMessage: IMessage;
+	messages: IMessage[];
+}
+
+const emptyMessage = {
+	httpCode: null,
+	type: null,
+	value: null,
+};
 const messages = new Queue();
-const initialState = {
-	lastMessage: null,
+const initialState: IState = {
+	currentMessage: emptyMessage,
 	messages: messages.get(),
 };
 
@@ -13,8 +24,15 @@ export default (state = initialState, action) => {
 		case 'RECEIVE_MESSAGE': {
 			messages.add(action.message);
 			nextState = { ...nextState, ...{
-				lastMessage: messages.last(),
+				currentMessage: messages.last(),
 				messages: messages.get(),
+			}};
+			break;
+		}
+
+		case 'UNSET_CURRENT_MESSAGE': {
+			nextState = { ...nextState, ... {
+				currentMessage: emptyMessage,
 			}};
 			break;
 		}

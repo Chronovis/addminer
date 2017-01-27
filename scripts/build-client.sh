@@ -15,8 +15,4 @@ fi
     src/client/index.ts \
     --plugin [ tsify --project src/client/tsconfig.json ] \
     --outfile build/client/js/index.js \
-    --external react \
-    --external react-dom \
-    --external classnames \
-    --external react-router \
     --verbose
