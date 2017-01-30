@@ -5,7 +5,7 @@ import { userLogin } from './sql';
 
 export default (app) =>
 	app.post('/login', multer().none(), async (req, res) => {
-		const result = await pgConnect(userLogin(req.body));
+		const result: any = await pgConnect(userLogin(req.body));
 		const authenticated = await bcrypt.compare(req.body.password, result.rows[0].hash);
 		const data = { authenticated };
 		res.json(data);

@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS image__tag CASCADE;
 
 CREATE TABLE image (
 	id SERIAL PRIMARY KEY,
-	date TIMESTAMP WITH TIME ZONE,
+	upload_date TIMESTAMP WITH TIME ZONE,
   hash TEXT UNIQUE,
 	mimetype TEXT,
 	ocr TEXT,
@@ -21,6 +21,12 @@ CREATE TABLE "user" (
   email_address TEXT UNIQUE,
 	hash TEXT,
 	registration_date TIMESTAMP WITH TIME ZONE
+);
+
+CREATE TABLE auth_token (
+	token TEXT PRIMARY KEY,
+	user_id SERIAL,
+	creation_date TIMESTAMP WITH TIME ZONE
 );
 
 CREATE TABLE tag (
