@@ -1,28 +1,28 @@
 import 'whatwg-fetch';
 import history from '../routes/history';
 
-export const userLogin = (formData) => (dispatch, getState) => {
-	fetch('/api/login', {
+export const userLogin = (formData) => async (dispatch/*, getState */) => {
+	const url = '/api/login';
+	const initData = {
 		body: formData,
 		method: 'POST',
-	})
-		.then((response) => {
-			if (response.status === 200) {
-				dispatch({
-					token: response.headers.get('Authorization'),
-					type: 'USER_LOGIN',
-				});
+	};
 
-				history.replace('/');
-			}
+	const response = await fetch(url, initData);
+	const { latestUploads, message } = await response.json();
 
-			return response;
-		})
-		.then((response) => response.json())
-		.then((json) => {
-			return dispatch({
-				message: json['message'],
-				type: 'RECEIVE_MESSAGE',
-			})
+	if (response.status === 200) {
+		dispatch({
+			latestUploads,
+			token: response.headers.get('Authorization'),
+			type: 'USER_LOGIN',
 		});
+
+		history.replace('/');
+	}
+
+	dispatch({
+		message,
+		type: 'RECEIVE_MESSAGE',
+	});
 };
