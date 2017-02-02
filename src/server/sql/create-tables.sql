@@ -3,6 +3,7 @@ CREATE EXTENSION postgis;
 
 DROP TABLE IF EXISTS image CASCADE;
 DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS auth_token CASCADE;
 DROP TABLE IF EXISTS tag CASCADE;
 DROP TABLE IF EXISTS image__user CASCADE;
 DROP TABLE IF EXISTS image__tag CASCADE;
@@ -10,7 +11,7 @@ DROP TABLE IF EXISTS image__tag CASCADE;
 CREATE TABLE image (
 	id SERIAL PRIMARY KEY,
 	upload_date TIMESTAMP WITH TIME ZONE,
-  hash TEXT UNIQUE,
+	hash TEXT UNIQUE,
 	mimetype TEXT,
 	ocr TEXT,
 	coordinates GEOGRAPHY(POINT,4326)
@@ -18,7 +19,7 @@ CREATE TABLE image (
 
 CREATE TABLE "user" (
 	id SERIAL PRIMARY KEY,
-  email_address TEXT UNIQUE,
+	email_address TEXT UNIQUE,
 	hash TEXT,
 	registration_date TIMESTAMP WITH TIME ZONE
 );
@@ -37,6 +38,7 @@ CREATE TABLE tag (
 CREATE TABLE image__user (
 	image_id SERIAL,
 	user_id SERIAL,
+	creation_date TIMESTAMP WITH TIME ZONE,
 	PRIMARY KEY (image_id, user_id)
 );
 

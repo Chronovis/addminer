@@ -6,14 +6,23 @@ export const userLogin = (formData) => (dispatch, getState) => {
 		body: formData,
 		method: 'POST',
 	})
-		.then((response) => response.json())
 		.then((response) => {
-			dispatch({
-				authenticated: response['authenticated'],
-				type: 'USER_LOGIN',
-				user: response['user'],
-			});
+			if (response.status === 200) {
+				dispatch({
+					token: response.headers.get('Authorization'),
+					type: 'USER_LOGIN',
+				});
 
-			history.replace('/');
+				history.replace('/');
+			}
+
+			return response;
+		})
+		.then((response) => response.json())
+		.then((json) => {
+			return dispatch({
+				message: json['message'],
+				type: 'RECEIVE_MESSAGE',
+			})
 		});
 };

@@ -15,9 +15,8 @@ export default (
 				component={App}
 				onEnter={(nextState, replace, cb) => {
 					const state = store.getState();
-					if (!state.user.authenticated) {
-						replace('/login');
-					}
+					console.log(state.user.token);
+					if (state.user.token == null) replace('/login');
 					cb();
 				}}
 				path="/"

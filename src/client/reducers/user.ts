@@ -1,6 +1,6 @@
 const initialState = {
-	authenticated: false,
-	user: null,
+	latestUploads: [],
+	token: null,
 };
 
 export default (state = initialState, action) => {
@@ -9,14 +9,13 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case 'USER_LOGIN': {
 			nextState = { ...nextState, ...{
-				authenticated: action.authenticated,
+				token: action.token,
 			}};
 			break;
 		}
 
 		case 'USER_LOGOUT': {
-			nextState = { ...nextState, ...{
-			}};
+			nextState = initialState;
 			break;
 		}
 

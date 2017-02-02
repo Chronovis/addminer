@@ -50,6 +50,7 @@
     "hire-forms-checkbox": "^1.0.3",
     "hire-forms-input": "^2.1.0",
     "hire-forms-select": "^2.2.1",
+    "jsonwebtoken": "^7.2.1",
     "lodash.debounce": "^4.0.8",
     "md5-file": "^3.1.1",
     "multer": "^1.2.1",

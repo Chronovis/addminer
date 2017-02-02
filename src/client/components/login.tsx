@@ -1,41 +1,51 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as cx from 'classnames';
+import { IMessage } from '../../interfaces';
+import { unsetCurrentMessage } from '../actions/message';
 import { userLogin } from '../actions/user';
+import Message from './message/index';
 
 interface IEventsProps {
-	userLogin: (form: any) => void,
+	message: IMessage;
+	userLogin: (form: any) => void;
+	unsetCurrentMessage: () => void;
 }
 
 class Login extends React.Component<IEventsProps, {}> {
 	public render() {
 		return (
-			<form>
-				<ul>
-					<li>
-						<input
-							name="email_address"
-							placeholder="Email address"
-							type="text"
-						/>
-					</li>
-					<li>
-						<input
-							name="password"
-							placeholder="Password"
-							type="password"
-						/>
-					</li>
-					<li>
-						<div
-							className="submit"
-							onClick={this.submit}
-						>
-							Submit
-						</div>
-					</li>
-				</ul>
-			</form>
+			<div className="login">
+				<Message
+					message={this.props.message}
+					unsetCurrentMessage={this.props.unsetCurrentMessage}
+				/>
+				<form>
+					<ul>
+						<li>
+							<input
+								name="email_address"
+								placeholder="Email address"
+								type="text"
+							/>
+						</li>
+						<li>
+							<input
+								name="password"
+								placeholder="Password"
+								type="password"
+							/>
+						</li>
+						<li>
+							<div
+								className="submit"
+								onClick={this.submit}
+							>
+								Submit
+							</div>
+						</li>
+					</ul>
+				</form>
+			</div>
 		);
 	}
 
@@ -48,8 +58,10 @@ class Login extends React.Component<IEventsProps, {}> {
 
 export default connect(
 	(state) => ({
-		authenticated: state.user.authenticated,
-		user: state.user.user,
+		message: state.message.currentMessage,
 	}),
-	{ userLogin },
+	{
+		userLogin,
+		unsetCurrentMessage,
+	},
 )(Login);

@@ -8,7 +8,7 @@ const App = (props) =>
 	<div className="app">
 		<Message
 			message={props.message}
-		  unsetCurrentMessage={props.unsetCurrentMessage}
+			unsetCurrentMessage={props.unsetCurrentMessage}
 		/>
 		<header><h1>Addminer</h1></header>
 		{React.cloneElement(props.children, {...props})}
@@ -19,6 +19,7 @@ export default connect(
 		imageHeight: state.image.imageHeight,
 		imageSrc: state.image.imageSrc,
 		imageWidth: state.image.imageWidth,
+		latestUploads: state.user.latestUploads,
 		message: state.message.currentMessage,
 		percentageLoaded: state.image.percentageLoaded,
 	}),

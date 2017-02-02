@@ -41,5 +41,6 @@ export const uploadImage = (file) => (dispatch, getState) => {
 	xhr.upload.addEventListener('progress', onProgress);
 	xhr.addEventListener('readystatechange', onReadystatechange);
 	xhr.open('POST', '/api/upload');
+	xhr.setRequestHeader('Authorization', getState().user.token);
 	xhr.send(formData);
 };

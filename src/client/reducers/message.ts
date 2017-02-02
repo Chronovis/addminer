@@ -7,7 +7,6 @@ interface IState {
 }
 
 const emptyMessage = {
-	httpCode: null,
 	type: null,
 	value: null,
 };
