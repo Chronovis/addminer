@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LatestUploads from './latest-uploads';
+import LatestUploads from './latest-uploads/index';
 import UploadInput from './upload-input';
 
 export default (props) =>
@@ -7,3 +7,4 @@ export default (props) =>
 		<UploadInput {...props} />
 		<LatestUploads {...props} />
 	</div>;
+

@@ -11,7 +11,9 @@ const App = (props) =>
 			unsetCurrentMessage={props.unsetCurrentMessage}
 		/>
 		<header><h1>Addminer</h1></header>
-		{React.cloneElement(props.children, {...props})}
+		<div className="body">
+			{React.cloneElement(props.children, {...props})}
+		</div>
 	</div>;
 
 export default connect(

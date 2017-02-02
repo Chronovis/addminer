@@ -1,43 +1,11 @@
-body
-  background-color #CCC
-
 .app
-  box-sizing border-box
-  height 100%
-  padding 1%
-  width 100%
+	box-sizing border-box
+	height 100%
+	padding 1%
+	width 100%
 
-  .image-placeholder
-    position relative
+	& > header
+		height 20%
 
-    img, .loader
-      left 0
-      right 0
-      bottom 0
-      position absolute
-
-    img
-      border-radius 1%
-      top 0
-
-    .loader
-      background-color rgba(0, 0, 0, 0.8)
-      transition all 200ms
-      z-index 1
-
-    .status
-      color white
-      font-weight bold
-      font-size 2em
-      margin-top -1em
-      position absolute
-      text-align center
-      text-shadow 0 0 6px black
-      top 50%
-      width 100%
-      z-index 2
-
-      &.ready
-        color lightgreen
-        font-size 6em
-
+	& > .body
+		height 80%

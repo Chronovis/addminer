@@ -8,9 +8,8 @@ export default (state = initialState, action) => {
 
 	switch (action.type) {
 		case 'USER_LOGIN': {
-			nextState = { ...nextState, ...{
-				token: action.token,
-			}};
+			const { latestUploads, token } = action;
+			nextState = { ...nextState, ...{ latestUploads, token }};
 			break;
 		}
 

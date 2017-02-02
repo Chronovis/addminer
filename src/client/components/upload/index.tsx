@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import UploadProgress from './upload-progress';
+import UploadProgress from './upload-progress/index';
 
 export default (props) =>
 	<div className="upload">
-		<UploadProgress {...props} />;
+		<UploadProgress {...props} />
 		<div className="metadata">
 			<ul>
 				<li>bla</li>

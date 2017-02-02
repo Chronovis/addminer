@@ -26,7 +26,7 @@ proxyOptions.route = '/api';
 
 browserSync.init({
 	server: {
-		baseDir: baseDir,
+		baseDir: [baseDir, './upload'],
 		middleware: [
 			proxy(proxyOptions),
 			modRewrite([
