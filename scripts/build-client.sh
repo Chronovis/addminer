@@ -14,5 +14,7 @@ fi
 "./node_modules/.bin/$command" \
     src/client/index.ts \
     --plugin [ tsify --project src/client/tsconfig.json ] \
+	--require classnames \
+	--require react \
     --outfile build/client/js/index.js \
     --verbose

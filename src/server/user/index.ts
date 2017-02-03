@@ -7,12 +7,17 @@ import pgConnect from '../pg-pool';
 
 export default (app) =>
 	app.post('/login', multer().none(), async (req, res) => {
-		const result: any = await pgConnect(userLogin(req.body));
-		const { hash, id } = result.rows[0];
-		const authenticated = await bcrypt.compare(req.body.password, hash);
+		const result = await pgConnect(userLogin(req.body));
+		let authenticated = false;
+		const row = result['rows'][0];
+
+		if (row != null) {
+			authenticated = await bcrypt.compare(req.body.password, row.hash);
+		}
+
 		if (authenticated) {
-			const result2: any = await pgConnect(selectLatestImages(id));
-			const token = jwt.sign({ userId: id }, 'secret');
+			const result2: any = await pgConnect(selectLatestImages(row.id));
+			const token = jwt.sign({ userId: row.id }, 'secret');
 			res.set('Authorization', `Bearer ${token}`);
 			res.json({
 				latestUploads: result2.rows,

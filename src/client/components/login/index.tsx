@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IMessage } from '../../interfaces';
-import { unsetCurrentMessage } from '../actions/message';
-import { userLogin } from '../actions/user';
-import Message from './message/index';
+import { IMessage } from '../../../interfaces';
+import { unsetCurrentMessage } from '../../actions/message';
+import { userLogin } from '../../actions/user';
+import Message from '../message/index';
 
 interface IEventsProps {
 	message: IMessage;
