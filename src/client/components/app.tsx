@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { uploadImage } from '../actions/image';
 import { unsetCurrentMessage } from '../actions/message';
+import { autocompleteTag } from '../actions/tag';
 import Message from './message/index';
 
 const App = (props) =>
@@ -26,6 +27,7 @@ export default connect(
 		percentageLoaded: state.image.percentageLoaded,
 	}),
 	{
+		autocompleteTag,
 		unsetCurrentMessage,
 		uploadImage,
 	},
