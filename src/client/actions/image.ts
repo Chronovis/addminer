@@ -1,3 +1,9 @@
+import {IKeyValue} from '../../interfaces';
+
+export const setUploadTags = (tags: IKeyValue[]) => (dispatch, getState) =>
+	dispatch({ type: 'SET_UPLOAD_TAGS', tags });
+
+
 export const uploadImage = (file) => (dispatch, getState) => {
 	const onLoad = (ev) => {
 		const image = new Image();

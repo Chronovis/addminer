@@ -1,20 +1,21 @@
 import AutocompleteList from 'hire-forms-autocomplete-list';
 import * as React from 'react';
+import {IKeyValue} from '../../../../interfaces';
 
 interface IMetadataProps {
-	autocompleteTag: (q: string, done: () => void) => void,
+	autocompleteTag: (q: string, done: () => void) => void;
+	newUploadTags: IKeyValue[];
+	setUploadTags: (tags: IKeyValue[]) => void;
 }
 
 interface IMetadataState {
-	tags: string[],
+	inputValue?: string;
 }
 
 class Metadata extends React.Component<IMetadataProps, IMetadataState> {
 	public state = {
-		tags: [],
+		inputValue: '',
 	};
-
-	private autocompleteListNode = null;
 
 	public render() {
 		return (
@@ -22,20 +23,16 @@ class Metadata extends React.Component<IMetadataProps, IMetadataState> {
 				<AutocompleteList
 					async={this.props.autocompleteTag}
 					focus
-					onChange={(tags) => this.setState({ tags })}
+					onChange={this.handleNextTags}
+					onInputChange={(inputValue: string) => this.setState({ inputValue })}
 					placeholder="Enter tags"
-					values={this.state.tags}
+					showNothingFoundMessage
+					value={{ key: null, value: this.state.inputValue }}
+					values={this.props.newUploadTags}
 				>
 					<div
 						className="add-new-tag-to-list"
-						onClick={() => {
-							this.setState({
-								tags: this.state.tags.concat({
-									key: null,
-									value: this.autocompleteListNode.querySelector('input').value,
-								})
-							})
-						}}
+						onClick={this.handleAddNewTag}
 					>
 						+
 					</div>
@@ -43,6 +40,21 @@ class Metadata extends React.Component<IMetadataProps, IMetadataState> {
 			</div>
 		);
 	}
-};
+
+	private handleAddNewTag = () => {
+		const nextTags = this.props.newUploadTags
+			.concat({
+				key: null,
+				value: this.state.inputValue,
+			});
+
+		this.handleNextTags(nextTags);
+	};
+
+	private handleNextTags = (nextTags) => {
+		this.setState({ inputValue: '' });
+		this.props.setUploadTags(nextTags);
+	}
+}
 
 export default Metadata;

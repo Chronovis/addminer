@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { uploadImage } from '../actions/image';
+import {uploadImage, setUploadTags} from '../actions/image';
 import { unsetCurrentMessage } from '../actions/message';
 import { autocompleteTag } from '../actions/tag';
 import Message from './message/index';
@@ -24,10 +24,12 @@ export default connect(
 		imageWidth: state.image.imageWidth,
 		latestUploads: state.user.latestUploads,
 		message: state.message.currentMessage,
+		newUploadTags: state.image.tags,
 		percentageLoaded: state.image.percentageLoaded,
 	}),
 	{
 		autocompleteTag,
+		setUploadTags,
 		unsetCurrentMessage,
 		uploadImage,
 	},
